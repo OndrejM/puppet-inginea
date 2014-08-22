@@ -5,6 +5,9 @@ class { 'apache':
 class {'::apache::mod::php':
 }
 
+class {'::apache::mod::fcgid':
+}
+
 apache::vhost { 'origami.inginea.eu':
   port    => '80',
   docroot => '/var/www/origami.inginea.eu/web',
@@ -12,12 +15,11 @@ apache::vhost { 'origami.inginea.eu':
   serveraliases => ['www.origami.inginea.eu'],
   directories => [
     { 'path' => '/var/www/origami.inginea.eu/web',
-      'provider' => 'direcotry',
-      'auth_require' => 'all granted' 
+      'provider' => 'directory'
     },
-    { 'path' => '/var/www/origami.inginea.eu/web',
-      'provider' => 'direcotry',
-      'auth_require' => 'all granted' 
+    { path => '\.ph(p3?|tml)$',
+      provider => 'filesmatch',
+      sethandler => 'None'
     }
   ],
   custom_fragment => 'AddType application/x-httpd-php .php .php3 .php4 .php5',
@@ -29,3 +31,18 @@ apache::vhost { 'origami.inginea.eu':
   ]
 }
 
+apache::vhost { 'inginea.eu':
+  port => '80',
+  docroot => '/var/www/inginea.eu/web',
+  servername => 'inginea.eu',
+  serveraliases => ['www.inginea.eu'],
+  directories => [
+    { path => '/var/www/inginea.eu/web',
+      provider => 'directory'
+    },
+    { path => '\.ph(p3?|tml)$',
+      provider => 'filesmatch',
+      sethandler => 'None'
+    }
+  ]
+}
