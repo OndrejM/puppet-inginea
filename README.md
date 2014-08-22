@@ -5,10 +5,11 @@ Puppet configuration of inginea server
 
 Root of this repository is /etc/puppet
 
-To configure puppet, execute:
+To configure system with puppet, execute (will download missing modules and update system according to manifests):
 
-    # updates external modules (downlaods which are missing)
+    bin/update_system.sh
+
+For only downloading missing modules, execute:
+
     bin/install_modules.sh
     
-    # updates system according to manifests
-    sudo puppet apply manifests
