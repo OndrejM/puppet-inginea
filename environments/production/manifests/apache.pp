@@ -31,6 +31,16 @@ apache::vhost { 'origami.inginea.eu':
   ]
 }
 
+file {'/var/www/origami.inginea.eu':
+  ensure => directory,
+  mode   => 0755,
+}
+
+file {'/var/www/origami.inginea.eu/web':
+  ensure => directory,
+  mode   => 0755
+}
+
 apache::vhost { 'inginea.eu':
   port => '80',
   docroot => '/var/www/inginea.eu/web',
