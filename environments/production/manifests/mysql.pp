@@ -12,6 +12,10 @@ override_options => $my_cfg_options
 
 }
 
+class {'mysql::bindings':
+	php_enable => true
+}
+
 class woocommerce-mysql {
 mysql_database { 'wordpress':
   ensure  => 'present',
