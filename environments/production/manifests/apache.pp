@@ -147,7 +147,7 @@ class inginea {
       { path => '/var/www/inginea.eu/web',
         provider => 'directory'
       },
-      { path => '\.ph(p3?|tml)$',
+      { path => '.+\.(php3?|x?html)$',
         provider => 'filesmatch',
         sethandler => 'None'
       }
