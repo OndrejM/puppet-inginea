@@ -80,3 +80,21 @@ mysql_grant { 'jogablog@localhost/jogablog.*':
 
 class {'jogablog-mysql':
 }
+
+class jogablog2-mysql {
+mysql_database { 'jogablog2':
+  ensure  => 'present',
+  charset => 'utf8',
+  collate => 'utf8_czech_ci',
+}
+mysql_grant { 'jogablog@localhost/jogablog2.*':
+  ensure     => 'present',
+  options    => ['GRANT'],
+  privileges => ['ALL'],
+  table      => '*.*',
+  user       => 'jogablog@localhost',
+}
+}
+
+class {'jogablog2-mysql':
+}
