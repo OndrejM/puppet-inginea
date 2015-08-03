@@ -137,6 +137,93 @@ class woocommerce-inginea {
 class {'woocommerce-inginea':
 }
 
+class itblog-inginea {
+  apache::vhost { "${alias}.inginea.eu":
+    port    => '80',
+    docroot => "/var/www/${alias}.inginea.eu/web",
+    servername => "${alias}.inginea.eu",
+    serveraliases => ["www.${alias}.inginea.eu"],
+    directories => [
+      { 'path' => "/var/www/${alias}.inginea.eu/web",
+        'provider' => 'directory'
+      },
+      { path => '\.ph(p3?|tml)$',
+        provider => 'filesmatch',
+        sethandler => 'None'
+      }
+    ],
+    custom_fragment => 'AddType application/x-httpd-php .php .php3 .php4 .php5',
+    php_admin_values => [
+      "sendmail_path '/usr/sbin/sendmail -t -i -f${alias}@origami.inginea.eu'",
+      "upload_tmp_dir /var/www/${alias}.inginea.eu/web/tmp",
+      "session.save_path /var/www/${alias}.inginea.eu/web/tmp",
+      "open_basedir /var/www/${alias}.inginea.eu/web:/var/www/${alias}.inginea.eu/web/private:/var/www/${alias}.inginea.eu/web/tmp:/srv/www/${alias}.inginea.eu/web:/usr/share/php5:/usr/share/php:/tmp:/usr/share/phpmyadmin:/etc/phpmyadmin:/var/lib/phpmyadmin"
+    ]
+  }
+
+  file {"/var/www/${alias}.inginea.eu":
+    ensure => directory,
+    mode   => 0755,
+  }
+
+  file {"/var/www/${alias}.inginea.eu/web":
+    ensure => directory,
+    mode   => 0755
+  }
+
+  file {"/var/www/${alias}.inginea.eu/web/tmp":
+    ensure => directory,
+    mode   => 0755
+  }
+}
+
+class {'itblog-inginea':
+    alias => 'itblog'
+}
+
+class jogablog-inginea {
+  apache::vhost { "${alias}.inginea.eu":
+    port    => '80',
+    docroot => "/var/www/${alias}.inginea.eu/web",
+    servername => "${alias}.inginea.eu",
+    serveraliases => ["www.${alias}.inginea.eu"],
+    directories => [
+      { 'path' => "/var/www/${alias}.inginea.eu/web",
+        'provider' => 'directory'
+      },
+      { path => '\.ph(p3?|tml)$',
+        provider => 'filesmatch',
+        sethandler => 'None'
+      }
+    ],
+    custom_fragment => 'AddType application/x-httpd-php .php .php3 .php4 .php5',
+    php_admin_values => [
+      "sendmail_path '/usr/sbin/sendmail -t -i -f${alias}@origami.inginea.eu'",
+      "upload_tmp_dir /var/www/${alias}.inginea.eu/web/tmp",
+      "session.save_path /var/www/${alias}.inginea.eu/web/tmp",
+      "open_basedir /var/www/${alias}.inginea.eu/web:/var/www/${alias}.inginea.eu/web/private:/var/www/${alias}.inginea.eu/web/tmp:/srv/www/${alias}.inginea.eu/web:/usr/share/php5:/usr/share/php:/tmp:/usr/share/phpmyadmin:/etc/phpmyadmin:/var/lib/phpmyadmin"
+    ]
+  }
+
+  file {"/var/www/${alias}.inginea.eu":
+    ensure => directory,
+    mode   => 0755,
+  }
+
+  file {"/var/www/${alias}.inginea.eu/web":
+    ensure => directory,
+    mode   => 0755
+  }
+
+  file {"/var/www/${alias}.inginea.eu/web/tmp":
+    ensure => directory,
+    mode   => 0755
+  }
+}
+
+class {'jogablog-inginea':
+    alias => 'jogablog'
+}
 class inginea {
   apache::vhost { 'inginea.eu':
     port => '80',
