@@ -1,5 +1,7 @@
 Class['origami-inginea'] 
--> Class['git-installed'] 
+-> Class['origami-inginea-files']
+
+Class['git-installed'] 
 -> Class['origami-inginea-files']
 
 # PHP Install extensions
