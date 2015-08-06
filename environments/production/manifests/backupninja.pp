@@ -46,3 +46,8 @@ backupninja::rsync { '13_backup_www_rsync':
   dest_type           => 'local',
   format              => 'mirror'
 }
+
+backupninja::sh { '20_git_commit_staging':
+  ensure              => 'present',
+  command             => template('backupninja_production/git_commit_staging_command.sh.erb')
+}

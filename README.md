@@ -18,7 +18,6 @@ Versioned common local modules are in localmodules folder and they are globally 
 
 TODO:
  - backup
-  - add rsync configuration to copy mysql dumps into staging directory
   - add sh configuration support to backupninja
   - configure sh backup to create a new git version from staging directory
   - push git repository to Dropbox folder
