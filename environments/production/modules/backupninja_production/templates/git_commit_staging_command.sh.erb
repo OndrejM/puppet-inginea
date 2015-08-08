@@ -1,1 +1,7 @@
-touch /home/backup/staging/newtouchfile
+cd <%= scope.lookupvar('staging_dir') %>
+
+find * -type d -name '.git' -exec mv {} {}_backup_rename \;
+git add -A --ignore-errors .
+DATE=`date`
+git commit -m 'BACKUP:'"$DATE"
+

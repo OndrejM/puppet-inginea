@@ -47,8 +47,16 @@ class backup {
     backupdir           => 'www',
     source_type         => 'local',
     source_include      => 'var/www',
+    source_exclude      => '.git',
     dest_type           => 'local',
     format              => 'mirror'
+  }
+
+  exec { 'init git repo in staging dir':
+    command => 'git init',
+    cwd => $staging_dir,
+    creates => "${staging_dir}/.git",
+    path => '/bin:/usr/bin'
   }
 
   backupninja::sh { '20_git_commit_staging':
@@ -71,6 +79,7 @@ class backup {
     backupdir           => 'ondro',
     source_type         => 'local',
     source_include      => 'home/ondro',
+    source_exclude      => '.git',
     dest_type           => 'local',
     format              => 'mirror'
   }  
