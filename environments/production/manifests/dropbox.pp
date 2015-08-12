@@ -1,3 +1,5 @@
+# drpbox tunred off as did not work headless
+
 
 class dropbox {
   $backup_user = 'backup'
@@ -47,5 +49,5 @@ class dropbox {
 
 }
 
-class {dropbox:
-}
+#class {dropbox:
+#}
